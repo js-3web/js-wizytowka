@@ -186,8 +186,8 @@ footer .dot { color: var(--accent); }
 <body>
 
 <nav class="nav">
-  <a href="/" class="nav-brand">JS<span class="dot">.</span> Sarafin</a>
-  <a href="/" class="nav-link">← Strona główna</a>
+  <a href="index.html" class="nav-brand">JS<span class="dot">.</span> Sarafin</a>
+  <a href="index.html" class="nav-link">← Strona główna</a>
 </nav>
 
 <main>
@@ -212,7 +212,7 @@ footer .dot { color: var(--accent); }
     </p>
 
     <div class="thanks-actions">
-      <a href="/" class="btn btn-primary">Wróć na stronę główną →</a>
+      <a href="index.html" class="btn btn-primary">Wróć na stronę główną →</a>
     </div>
 
     <div class="countdown">
@@ -233,7 +233,7 @@ footer .dot { color: var(--accent); }
     counter.textContent = seconds;
     if (seconds <= 0) {
       clearInterval(interval);
-      window.location.href = '/';
+      window.location.href = 'index.html';
     }
   }, 1000);
 </script>

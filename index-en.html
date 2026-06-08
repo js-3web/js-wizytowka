@@ -1565,11 +1565,11 @@ footer { background: var(--text); color: var(--bg-2); padding: 64px 0 32px; }
       </div>
 
       <div class="reveal">
-        <form class="form" name="contact-en" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
-          <input type="hidden" name="form-name" value="contact-en">
-          <p style="display:none;">
-            <label>Don't fill this in: <input name="bot-field"></label>
-          </p>
+        <form class="form" id="form-en" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="9c2a01ff-bfff-41e3-ac9c-db86350d0b0c">
+          <input type="hidden" name="subject" value="New inquiry from website (EN) — Jarosław Sarafin">
+          <input type="hidden" name="from_name" value="Sarafin website">
+          <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
 
           <div class="form-row">
             <label for="name">Full name *</label>
@@ -2010,6 +2010,39 @@ document.addEventListener('keydown', (e) => {
   window.addEventListener('resize', resize);
   resize();
   tick();
+})();
+
+// FORM HANDLING (Web3Forms) — submit + redirect to thank-you page
+(function() {
+  const form = document.getElementById('form-en');
+  if (!form) return;
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const button = form.querySelector('button[type="submit"]');
+    const originalText = button.textContent;
+    button.textContent = 'Sending…';
+    button.disabled = true;
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await response.json();
+      if (data.success) {
+        window.location.href = 'thank-you.html';
+      } else {
+        button.textContent = originalText;
+        button.disabled = false;
+        alert('There was a problem sending your message. Please try again or call: +48 785 882 208');
+      }
+    } catch (error) {
+      button.textContent = originalText;
+      button.disabled = false;
+      alert('There was a connection problem. Please try again or call: +48 785 882 208');
+    }
+  });
 })();
 </script>
 
